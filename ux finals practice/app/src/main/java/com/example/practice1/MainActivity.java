@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    List<SaleItem> forSaleList = new ArrayList<>();
+//    List<SaleItem> forSaleList = new ArrayList<>();
 
 //    [] fetch from csv
 //    [] create sale items adapter
@@ -46,26 +46,12 @@ public class MainActivity extends AppCompatActivity {
 //    [] create cart item adapter
 //
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        // START HERE
-        Log.i("INS", "Start");
-        fetchBikeData(); // ANNOTATE WITH @RequiresApi(api = Build.VERSION_CODES.O)
-
-        forSaleList.forEach(((saleItem)->{
-            Log.i("ITEM", saleItem.name + " " + saleItem.itemDate);
-        }));
-
-        SaleItemAdapter saleItemAdapter = new SaleItemAdapter(forSaleList);
-        // MAKE SURE TO LAYOUT OR GRID MANAGER
-        binding.mainRecyclerItemsHolder.setLayoutManager(new LinearLayoutManager(this));
-        binding.mainRecyclerItemsHolder.setAdapter(saleItemAdapter);
 
 
         setSupportActionBar(binding.toolbar);
@@ -82,66 +68,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void fetchBikeData(){
-//        forSaleList = new ArrayList<>();
-        InputStream inputStream = getResources().openRawResource(R.raw.indoor_bikes);
-
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(inputStream)
-        );
-
-        try {
-            String csvLine;
-
-            // with header
-//            if((csvLine = reader.readLine())!= null){
-//
-//            }
-
-            while((csvLine = reader.readLine())!= null){
-                String[] itemValues = csvLine.split(",");
-
-                String itemName = itemValues[0];
-                double itemPrice = Double.parseDouble(itemValues[1]);
-                String itemDateStr = itemValues[2];
-                String itemDesc = itemValues[3];
-                String itemUrl = itemValues[4];
-
-//                int itemImageDrawable = getResources().getIdentifier(
-//                        itemName.toLowerCase(), "drawable", getPackageName()
-//                );
-
-                SaleItem singleBikeSaleItem = new SaleItem(
-                        itemName,
-                        itemDesc,
-                        itemPrice,
-                        itemUrl
-                );
-
-                // ENSURE TO ANNOTATE WITH:   @RequiresApi(api = Build.VERSION_CODES.O)
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
-                LocalDate itemDate = LocalDate.parse(itemDateStr, formatter);
-                //d - one or more digits for date e.g., 8, 16, 31
-                //MMM - three letter month code e.g., SEP, MAY, JUN
-                //yyyy - 4 digit year e.g., 2023, 1945, 1632
-
-                //dd - two digits for date e.g., 08, 16, 31
-                //MM - month number e.g., 01, 05, 12
-                //yy - 2 digit year number e.g., 23, 45, 32
-
-                singleBikeSaleItem.setItemDate(itemDate);
-                forSaleList.add(singleBikeSaleItem);
-            }
-
-
-        }catch(Exception e){
-            Log.d("[fetchBikeData]", e.getMessage());
-        }
-
-
     }
 
     @Override
