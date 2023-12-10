@@ -1,6 +1,6 @@
 package com.example.practice1;
 
 public class CartItem {
-    Item item;
+    SaleItem saleItem;
     int amount;
 }

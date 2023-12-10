@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,13 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    List<Item> forSaleList = new ArrayList<>();
+    List<SaleItem> forSaleList = new ArrayList<>();
 
 //    [] fetch from csv
-//    [] create adapter
+//    [] create sale items adapter
+//            [] recycle sale items
 //    [] add to cart moves to detail fragment
 //    [] transfer data to detail fragment
-//    [] show detail fragmen info
+//    [] show detail fragment info
+//    [] create cart activity
+//    [] create cart item adapter
 //
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -55,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i("INS", "Start");
         fetchBikeData(); // ANNOTATE WITH @RequiresApi(api = Build.VERSION_CODES.O)
 
-        forSaleList.forEach(((item)->{
-            Log.i("ITEM", item.name + " " + item.itemDate);
+        forSaleList.forEach(((saleItem)->{
+            Log.i("ITEM", saleItem.name + " " + saleItem.itemDate);
         }));
 
 
@@ -106,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
 //                        itemName.toLowerCase(), "drawable", getPackageName()
 //                );
 
-                Item singleBikeItem = new Item(
+                SaleItem singleBikeSaleItem = new SaleItem(
                         itemName,
                         itemDesc,
                         itemPrice,
                         itemUrl
                 );
 
-                // ENSURE TO ANOTATE WITH:   @RequiresApi(api = Build.VERSION_CODES.O)
+                // ENSURE TO ANNOTATE WITH:   @RequiresApi(api = Build.VERSION_CODES.O)
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
                 LocalDate itemDate = LocalDate.parse(itemDateStr, formatter);
                 //d - one or more digits for date e.g., 8, 16, 31
@@ -124,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 //MM - month number e.g., 01, 05, 12
                 //yy - 2 digit year number e.g., 23, 45, 32
 
-                singleBikeItem.setItemDate(itemDate);
-                forSaleList.add(singleBikeItem);
+                singleBikeSaleItem.setItemDate(itemDate);
+                forSaleList.add(singleBikeSaleItem);
             }
 
 

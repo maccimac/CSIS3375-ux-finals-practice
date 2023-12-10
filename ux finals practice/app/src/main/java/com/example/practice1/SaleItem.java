@@ -2,25 +2,25 @@ package com.example.practice1;
 
 import java.time.LocalDate;
 
-public class Item {
+public class SaleItem {
     String name = "Name";
     String description = "Description";
     double price = 0.00;
     String url = "https://";
     LocalDate itemDate;
 
-    public Item(){
+    public SaleItem(){
 
     }
 
-    public Item(String name, String description, double price, String url) {
+    public SaleItem(String name, String description, double price, String url) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.url = url;
     }
 
-    public Item(String name, String description, double price, String url, LocalDate itemDate) {
+    public SaleItem(String name, String description, double price, String url, LocalDate itemDate) {
         this.name = name;
         this.description = description;
         this.price = price;
