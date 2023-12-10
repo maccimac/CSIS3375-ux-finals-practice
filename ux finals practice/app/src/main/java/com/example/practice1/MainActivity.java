@@ -15,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.practice1.databinding.ActivityMainBinding;
 
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         forSaleList.forEach(((saleItem)->{
             Log.i("ITEM", saleItem.name + " " + saleItem.itemDate);
         }));
+
+        SaleItemAdapter saleItemAdapter = new SaleItemAdapter(forSaleList);
+        // MAKE SURE TO LAYOUT OR GRID MANAGER
+        binding.mainRecyclerItemsHolder.setLayoutManager(new LinearLayoutManager(this));
+        binding.mainRecyclerItemsHolder.setAdapter(saleItemAdapter);
 
 
         setSupportActionBar(binding.toolbar);
