@@ -50,7 +50,12 @@ public class FirstFragment extends Fragment {
             public void onItemClick(int i) {
                checkItemDetail(i);
             }
+
+            public void extraMethod(int i){
+                Log.i("TEST", forSaleList.get(i).description);
+            }
         });
+
         // MAKE SURE TO LAYOUT OR GRID MANAGER
         binding.recyeclerItemsHolder.setLayoutManager(new LinearLayoutManager(container.getContext()));
         binding.recyeclerItemsHolder.setAdapter(saleItemAdapter);

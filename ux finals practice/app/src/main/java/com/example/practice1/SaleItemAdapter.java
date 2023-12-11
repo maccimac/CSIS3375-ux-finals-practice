@@ -77,16 +77,22 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
             super(itemView);
             this.holderBinding = holderBinding;
 //            this.holderBinding.getRoot().setOnClickListener(
-            this.holderBinding.btnReadMore.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            onItemClickListener.onItemClick(
-                                    SaleItemHolder.this.getAdapterPosition()
-                            );
-                        }
-                    }
-            );
+//            this.holderBinding.btnReadMore.setOnClickListener(
+//                    new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            onItemClickListener.onItemClick(
+//                                    SaleItemHolder.this.getAdapterPosition()
+//                            );
+//                        }
+//                    }
+//            );
+            this.holderBinding.btnReadMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.extraMethod(SaleItemHolder.this.getAdapterPosition());
+                }
+            });
 
         }
 
@@ -95,7 +101,11 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
 
     public interface OnItemClickListener{
         public void onItemClick(int i);
+        public  void extraMethod(int i);
+
     }
+
+
 
 
 }
