@@ -45,7 +45,12 @@ public class FirstFragment extends Fragment {
             Log.i("ITEM", saleItem.name + " " + saleItem.itemDate);
         }));
 
-        SaleItemAdapter saleItemAdapter = new SaleItemAdapter(forSaleList);
+        SaleItemAdapter saleItemAdapter = new SaleItemAdapter(forSaleList, new SaleItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int i) {
+               checkItemDetail(i);
+            }
+        });
         // MAKE SURE TO LAYOUT OR GRID MANAGER
         binding.recyeclerItemsHolder.setLayoutManager(new LinearLayoutManager(container.getContext()));
         binding.recyeclerItemsHolder.setAdapter(saleItemAdapter);
@@ -65,15 +70,22 @@ public class FirstFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void checkItemDetail(int i){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(
+                "ITEM_NAME", forSaleList.get(i).name
+        );
+        NavHostFragment.findNavController(FirstFragment.this)
+                .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void fetchBikeData(){
-//        forSaleList = new ArrayList<>();
+        forSaleList = new ArrayList<>();
         InputStream inputStream = getResources().openRawResource(R.raw.indoor_bikes);
 
         BufferedReader reader = new BufferedReader(
@@ -130,6 +142,15 @@ public class FirstFragment extends Fragment {
 
 
     }
+
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 
 
 }

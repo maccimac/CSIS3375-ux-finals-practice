@@ -1,5 +1,6 @@
 package com.example.practice1;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +47,16 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SaleItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SaleItemHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.holderBinding.textViewName.setText(
                 adapterSaleList.get(position).name
         );
+        holder.holderBinding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onItemClick(position);
+            }
+        });
 
     }
 
@@ -69,7 +76,8 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
         public SaleItemHolder(@NonNull View itemView, LayoutCartItemBinding holderBinding) {
             super(itemView);
             this.holderBinding = holderBinding;
-            this.holderBinding.getRoot().setOnClickListener(
+//            this.holderBinding.getRoot().setOnClickListener(
+            this.holderBinding.btnReadMore.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -88,6 +96,7 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
     public interface OnItemClickListener{
         public void onItemClick(int i);
     }
+
 
 }
 
