@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 // THIS IS IMPORTANT FOR DATA BINDING
-import com.example.practice1.databinding.LayoutCartItemBinding;
+import com.example.practice1.databinding.LayoutSaleItemBinding;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
     @Override
     public SaleItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 //        return null;
-        LayoutCartItemBinding binding =  LayoutCartItemBinding.inflate(
+        LayoutSaleItemBinding binding =  LayoutSaleItemBinding.inflate(
                 LayoutInflater.from(
                         parent.getContext()),
                 parent,
@@ -51,6 +51,8 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
         holder.holderBinding.textViewName.setText(
                 adapterSaleList.get(position).name
         );
+        holder.holderBinding.textViewDate.setText(String.valueOf(adapterSaleList.get(position).itemDate));
+        holder.holderBinding.imageView.setImageResource(adapterSaleList.get(position).imageId);
         holder.holderBinding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,11 +71,11 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
     // CREATE THIS FIRST BEFORE IMPLEMENTING METHODS?
     public class SaleItemHolder extends RecyclerView.ViewHolder{ // THEN CREATE CONSTRUCTOR
 
-        LayoutCartItemBinding holderBinding;
+        LayoutSaleItemBinding holderBinding;
         public SaleItemHolder(@NonNull View itemView) {
             super(itemView);
         }
-        public SaleItemHolder(@NonNull View itemView, LayoutCartItemBinding holderBinding) {
+        public SaleItemHolder(@NonNull View itemView, LayoutSaleItemBinding holderBinding) {
             super(itemView);
             this.holderBinding = holderBinding;
 //            this.holderBinding.getRoot().setOnClickListener(
