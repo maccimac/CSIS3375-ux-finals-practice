@@ -52,6 +52,7 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
                 adapterSaleList.get(position).name
         );
         holder.holderBinding.textViewDate.setText(String.valueOf(adapterSaleList.get(position).itemDate));
+        holder.holderBinding.textViewPrice.setText("$" + String.valueOf(adapterSaleList.get(position).price));
         holder.holderBinding.imageView.setImageResource(adapterSaleList.get(position).imageId);
         holder.holderBinding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
