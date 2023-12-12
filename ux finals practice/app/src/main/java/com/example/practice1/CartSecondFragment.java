@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.practice1.databinding.FragmentSecond2Binding;
+import com.example.practice1.databinding.FragmentCartSecondBinding;
 
-public class Second2Fragment extends Fragment {
+public class CartSecondFragment extends Fragment {
 
-    private FragmentSecond2Binding binding;
+    private FragmentCartSecondBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +21,7 @@ public class Second2Fragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentSecond2Binding.inflate(inflater, container, false);
+        binding = FragmentCartSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -32,7 +32,7 @@ public class Second2Fragment extends Fragment {
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Second2Fragment.this)
+                NavHostFragment.findNavController(CartSecondFragment.this)
                         .navigate(R.id.action_Second2Fragment_to_First2Fragment);
             }
         });

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity {
+public class XCartActivity extends AppCompatActivity {
 
     List<CartItem> cartItemList = new ArrayList<>();
     @Override

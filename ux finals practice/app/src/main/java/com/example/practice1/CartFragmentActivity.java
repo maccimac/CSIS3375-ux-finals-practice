@@ -8,24 +8,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
-import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.practice1.databinding.ActivityFragmentBinding;
+import com.example.practice1.databinding.ActivityCartFragmentBinding;
 
-public class FragmentActivity extends AppCompatActivity {
+public class CartFragmentActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityFragmentBinding binding;
+    private ActivityCartFragmentBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityFragmentBinding.inflate(getLayoutInflater());
+        binding = ActivityCartFragmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
