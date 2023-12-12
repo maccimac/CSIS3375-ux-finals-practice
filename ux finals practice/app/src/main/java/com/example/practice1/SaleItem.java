@@ -1,5 +1,6 @@
 package com.example.practice1;
 
+import androidx.appcompat.app.AppCompatActivity;
 import java.time.LocalDate;
 
 public class SaleItem {
@@ -8,6 +9,7 @@ public class SaleItem {
     double price = 0.00;
     String url = "https://";
     LocalDate itemDate;
+    Integer imageId;
 
     public SaleItem(){
 
@@ -68,4 +70,8 @@ public class SaleItem {
     public void setItemDate(LocalDate itemDate) {
         this.itemDate = itemDate;
     }
+
+    public Integer getImageId() {return imageId;}
+
+    public void setImageId(Integer imgId) {this.imageId = imgId;}
 }

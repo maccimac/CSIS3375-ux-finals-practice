@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.practice1.databinding.FragmentFirstBinding;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,12 +50,14 @@ public class FirstFragment extends Fragment {
         SaleItemAdapter saleItemAdapter = new SaleItemAdapter(forSaleList, new SaleItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int i) {
-               checkItemDetail(i);
+
             }
 
-            public void extraMethod(int i){
-                Log.i("TEST", forSaleList.get(i).description);
+            @Override
+            public void extraMethod(SaleItem item) {
+                    checkItemDetail(item);
             }
+//
         });
 
         // MAKE SURE TO LAYOUT OR GRID MANAGER
@@ -72,15 +76,26 @@ public class FirstFragment extends Fragment {
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
+
         });
     }
 
-    public void checkItemDetail(int i){
+    public void checkItemDetail(SaleItem item){
 
         Bundle bundle = new Bundle();
         bundle.putString(
-                "ITEM_NAME", forSaleList.get(i).name
+                "ITEM_NAME", item.name
         );
+        bundle.putString(
+                "ITEM_DESCRIPTION", item.description
+        );
+        bundle.putInt(
+                "ITEM_IMAGE", item.imageId
+        );
+        bundle.putDouble(
+                "ITEM_PRICE", item.price
+        );
+
         NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
 
@@ -114,16 +129,21 @@ public class FirstFragment extends Fragment {
                 String itemDesc = itemValues[3];
                 String itemUrl = itemValues[4];
 
-//                int itemImageDrawable = getResources().getIdentifier(
-//                        itemName.toLowerCase(), "drawable", getPackageName()
-//                );
-
                 SaleItem singleBikeSaleItem = new SaleItem(
                         itemName,
                         itemDesc,
                         itemPrice,
                         itemUrl
                 );
+
+
+//              int itemImageDrawable = getResources().getIdentifier(
+//                        itemName.toLowerCase(), "drawable", getPackageName());
+                int imageId = getResources().getIdentifier(
+                        itemName.toLowerCase(), "drawable", this.getContext().getPackageName()
+                );
+                singleBikeSaleItem.setImageId(imageId);
+
 
                 // ENSURE TO ANNOTATE WITH:   @RequiresApi(api = Build.VERSION_CODES.O)
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");

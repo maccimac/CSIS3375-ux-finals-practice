@@ -90,7 +90,9 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
             this.holderBinding.btnReadMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.extraMethod(SaleItemHolder.this.getAdapterPosition());
+                    onItemClickListener.extraMethod(
+                            adapterSaleList.get(SaleItemHolder.this.getAdapterPosition())
+                    );
                 }
             });
 
@@ -101,7 +103,7 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
 
     public interface OnItemClickListener{
         public void onItemClick(int i);
-        public  void extraMethod(int i);
+        public  void extraMethod(SaleItem item);
 
     }
 
