@@ -11,8 +11,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.practice1.databinding.FragmentCartFirstBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartFirstFragment extends Fragment {
 
+    List<CartItem> cartItemList = new ArrayList<>();
     private FragmentCartFirstBinding binding;
 
     @Override
@@ -28,6 +32,8 @@ public class CartFirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override

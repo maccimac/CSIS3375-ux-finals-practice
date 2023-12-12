@@ -33,7 +33,7 @@ public class CartSecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(CartSecondFragment.this)
-                        .navigate(R.id.action_Second2Fragment_to_First2Fragment);
+                        .navigate(R.id.action_cart2_to_orders);
             }
         });
     }

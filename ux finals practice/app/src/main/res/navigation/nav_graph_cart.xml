@@ -22,7 +22,20 @@
         tools:layout="@layout/fragment_cart_second">
 
         <action
-            android:id="@+id/action_Second2Fragment_to_First2Fragment"
+            android:id="@+id/action_cart2_to_orders"
+            app:destination="@id/OrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OrdersFragment"
+        android:name="com.example.practice1.OrdersFragment"
+        android:label="Your orders"
+        tools:layout="@layout/fragment_order_list">
+
+        <action
+            android:id="@+id/action_orders_to_cart2"
+            app:destination="@id/CartSecondFragment" />
+        <action
+            android:id="@+id/action_orders_to_cart1"
             app:destination="@id/CartFirstFragment" />
     </fragment>
 </navigation>
