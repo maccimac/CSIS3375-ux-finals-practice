@@ -32,12 +32,16 @@ public class SecondFragment extends Fragment {
         if(getArguments()!= null){
             binding.textViewDetailName.setText(getArguments().getString("ITEM_NAME", "Bike"));
             binding.textViewDetailPrice.setText(
-                    String.valueOf(getArguments().getInt("ITEM_IMAGE", 0))
+                    "$" +
+                    String.valueOf(getArguments().getDouble("ITEM_PRICE", 0))
                     // String.toString
                     // obj.toString()
             );
             binding.imageDetailImage.setImageResource(
                     getArguments().getInt("ITEM_IMAGE", 1)
+            );
+            binding.textViewDetailDesc.setText(
+                    getArguments().getString("ITEM_DESCRIPTION", "Stationary bike")
             );
         }
 
