@@ -54,10 +54,7 @@ public class CartFirstFragment extends Fragment {
                 new CartItem()
             );
         }
-
-        fragCartItemList.add(
-                new CartItem()
-        );
+        
 
         parentActivity.activityCartItemList = fragCartItemList;
         binding = FragmentCartFirstBinding.inflate(inflater, container, false);
