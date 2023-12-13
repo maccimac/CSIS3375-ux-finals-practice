@@ -1,5 +1,6 @@
 package com.example.practice1;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +10,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.practice1.databinding.FragmentSecondBinding;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SecondFragment extends Fragment {
 
-    List<ColorSpec> colorOptionsList;
+    List<ColorItem> colorOptionsList;
+    ColorItemViewModel spinnerColorViewModel;
+    ColorItemAdapter colorItemAdapter;
     private FragmentSecondBinding binding;
 
     @Override
@@ -28,6 +34,7 @@ public class SecondFragment extends Fragment {
     ) {
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
 
 
@@ -35,6 +42,27 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        colorOptionsList = new ArrayList<ColorItem>();
+        colorOptionsList.add(new ColorItem("Blue", Color.BLUE) );
+        colorOptionsList.add(new ColorItem("Red", Color.RED) );
+
+        spinnerColorViewModel = new ViewModelProvider(requireActivity())
+                .get(ColorItemViewModel.class);
+        spinnerColorViewModel.getColorList().observe(
+                getViewLifecycleOwner(),
+                new Observer<List<ColorItem>>() {
+                    @Override
+                    public void onChanged(List<ColorItem> colorItems) {
+                        colorOptionsList  = colorItems;
+                        colorItemAdapter = new ColorItemAdapter(colorOptionsList);
+                        binding.spinnerDetailColor.setAdapter(colorItemAdapter);
+                    }
+                }
+        );
+        spinnerColorViewModel.loadColorList(colorOptionsList);
+//        binding.spinnerDetailColor.setAdapter(colorItemAdapter);
+
 
 
 

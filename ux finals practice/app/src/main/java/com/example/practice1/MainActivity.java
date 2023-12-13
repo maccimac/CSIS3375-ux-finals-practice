@@ -1,6 +1,7 @@
 package com.example.practice1;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -29,6 +31,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,17 +71,34 @@ public class MainActivity extends AppCompatActivity {
             cartItemList = intent.getParcelableArrayListExtra("CART_LIST");
         }
 
+//        List<String> ColorDescs = new ArrayList<>(
+//                Arrays.asList("BLACK","ORANGE","PURPLE"));
+//        List<Integer> ColorVals = new ArrayList<>(
+//                Arrays.asList(Color.LTGRAY,
+//                        Color.rgb(255,165,0),
+//                        Color.parseColor("#800080")));
+//        List<ColorItem> colorList = new ArrayList<>();
+//        for (int i = 0; i < ColorDescs.size();i++){
+//            ColorItem eachColor
+//                    = new ColorItem(ColorDescs.get(i),ColorVals.get(i));
+//            colorList.add(eachColor);
+//        }
+//        ColorItemViewModel colorSpecViewModel =
+//                new ViewModelProvider(this)
+//                        .get(ColorItemViewModel.class);
+//        colorSpecViewModel.loadColorList(colorList);
 
-            binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CartFragmentActivity.class);
-                intent.putParcelableArrayListExtra("CART_LIST", (ArrayList<CartItem>) cartItemList);
-                startActivity(intent);
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MainActivity.this, CartFragmentActivity.class);
+            intent.putParcelableArrayListExtra("CART_LIST", (ArrayList<CartItem>) cartItemList);
+            startActivity(intent);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 ////                        .setAnchorView(R.id.fab)
 ////                        .setAction("Action", null).show();
-            }
+        }
         });
     }
 
