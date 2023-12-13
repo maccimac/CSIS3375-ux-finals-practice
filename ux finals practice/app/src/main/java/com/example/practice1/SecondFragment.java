@@ -25,6 +25,7 @@ public class SecondFragment extends Fragment {
     List<ColorItem> colorOptionsList;
     ColorItemViewModel spinnerColorViewModel;
     ColorItemAdapter colorItemAdapter;
+    private boolean spinnerReady = false;
     private FragmentSecondBinding binding;
 
     @Override
@@ -44,7 +45,7 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         colorOptionsList = new ArrayList<ColorItem>();
-        colorOptionsList.add(new ColorItem("Blue", Color.BLUE) );
+        colorOptionsList.add(new ColorItem("Blue", Color.parseColor("#FFD5DBFF")) );
         colorOptionsList.add(new ColorItem("Red", Color.RED) );
 
         spinnerColorViewModel = new ViewModelProvider(requireActivity())
@@ -61,10 +62,10 @@ public class SecondFragment extends Fragment {
                 }
         );
         spinnerColorViewModel.loadColorList(colorOptionsList);
+        if (spinnerReady == false) {
+            spinnerReady = true; // Set the flag to false after the initial selection
+        }
 //        binding.spinnerDetailColor.setAdapter(colorItemAdapter);
-
-
-
 
 
         if(getArguments()!= null){
@@ -88,17 +89,35 @@ public class SecondFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         // set color of button
-                        Snackbar.make(view, "This ok?", Snackbar.LENGTH_LONG)
-                                .setAnchorView(R.id.image_detail_image)
-                                .setAction(
-                                        "OK",
+                        if(spinnerReady == false) return;
+
+                        binding.buttonSecond.setBackgroundColor(
+                                    colorOptionsList.get(i).colorVal
+                            );
+                            Snackbar.make(view, "This ok?", Snackbar.LENGTH_LONG)
+                                    .setAnchorView(R.id.image_detail_image)
+                                    .setAction(
+                                            "OK",
+                                            new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Toast.makeText(view.getContext(), "Got it", Toast.LENGTH_LONG ).show();
+                                                }
+                                            }
+                                    )
+                                     .setAction(
+                                "I like it",
                                         new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                Toast.makeText(view.getContext(), "Got it", Toast.LENGTH_LONG ).show();
+                                                binding.textViewDetailName.setTextColor(
+                                                        colorOptionsList.get(i).colorVal
+                                                );
                                             }
                                         }
                                 ).show();
+
+
 
 
                     }
