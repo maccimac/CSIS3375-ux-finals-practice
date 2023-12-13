@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.practice1.databinding.FragmentCartFirstBinding;
@@ -16,7 +19,7 @@ import java.util.List;
 
 public class CartFirstFragment extends Fragment {
 
-    List<CartItem> cartItemList = new ArrayList<>();
+    List<CartItem> fragCartItemList = new ArrayList<>();
     private FragmentCartFirstBinding binding;
 
     @Override
@@ -25,13 +28,30 @@ public class CartFirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
+        fragCartItemList.add(new CartItem());
+        fragCartItemList.add(new CartItem());
+
+        fragCartItemList.add(new CartItem());
+        fragCartItemList.add(new CartItem());
         binding = FragmentCartFirstBinding.inflate(inflater, container, false);
+        binding.listviewCartItems.setAdapter(new CartItemAdapter(fragCartItemList));
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        CartItemViewModel cartItemViewModel = new ViewModelProvider(requireActivity())
+                .get(CartItemViewModel.class);
+        cartItemViewModel.getCartItemList()
+                        .observe(getViewLifecycleOwner(), new Observer<List<CartItem>>() {
+                            @Override
+                            public void onChanged(List<CartItem> cartItemList) {
+                                fragCartItemList = cartItemList;
+                                binding.listviewCartItems.setAdapter(new CartItemAdapter(fragCartItemList));
+                            }
+                        });
 
 
 
