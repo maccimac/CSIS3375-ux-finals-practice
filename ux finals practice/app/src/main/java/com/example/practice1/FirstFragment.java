@@ -58,6 +58,8 @@ public class FirstFragment extends Fragment {
                 );
                 SaleItem saleToCart = forSaleList.get(i);
                 intent.putExtra("SALE_TO_CART", saleToCart);
+                MainActivity parentActivity = (MainActivity) getActivity();
+                intent.putParcelableArrayListExtra("CART_LIST", (ArrayList<CartItem>) parentActivity.cartItemList);
 //                intent.putExtra("TEXT", "Text");
                 startActivity(intent);
             }

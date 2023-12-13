@@ -16,8 +16,7 @@
         <ListView
             android:id="@+id/listview_cart_items"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-             />
+            android:layout_height="453dp" />
 
         <Button
             android:id="@+id/button_first"

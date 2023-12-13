@@ -82,7 +82,6 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
         public SaleItemHolder(@NonNull View itemView, LayoutSaleItemBinding holderBinding) {
             super(itemView);
             this.holderBinding = holderBinding;
-//            this.holderBinding.getRoot().setOnClickListener(
             this.holderBinding.btnAddToCart.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
@@ -90,12 +89,6 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
                             onItemClickListener.onItemClick(
                                     SaleItemHolder.this.getAdapterPosition()
                             );
-//                            Log.d("INTENT ATTEMPT", "Shoule move to new act");
-//                            Intent intent = new Intent(
-//                                    holderBinding.getRoot().getContext(), CartFragmentActivity.class
-//                            );
-//                            holderBinding.getRoot().getContext().startActivity(intent);
-
                         }
                     }
             );
@@ -107,20 +100,13 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
                     );
                 }
             });
-
         }
-
-//
     }
 
     public interface OnItemClickListener{
         public void onItemClick(int i);
         public  void extraMethod(SaleItem item);
-
     }
-
-
-
 
 }
 

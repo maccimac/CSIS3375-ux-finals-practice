@@ -22,20 +22,31 @@ public class CartFirstFragment extends Fragment {
 
     List<CartItem> fragCartItemList = new ArrayList<>();
     private FragmentCartFirstBinding binding;
+    CartFragmentActivity parentActivity;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        parentActivity = (CartFragmentActivity) getActivity();
+        if(parentActivity.activityCartItemList != null){
+            this.fragCartItemList = parentActivity.getCartList();
+        }
         Intent intent = getActivity().getIntent();
         if(intent != null){
 //            Bundle bundle = intent.getExtras();
+            List newCartList = intent.getParcelableArrayListExtra("CART_LIST");
+            if(newCartList != null){
+                fragCartItemList= newCartList;
+            }
             SaleItem saleToCart =  intent.getParcelableExtra("SALE_TO_CART");
+
             if(saleToCart != null){
                 fragCartItemList.add(
                         new CartItem(saleToCart)
                 );
+
             }
 
         }else{
@@ -44,11 +55,11 @@ public class CartFirstFragment extends Fragment {
             );
         }
 
-
-
         fragCartItemList.add(
                 new CartItem()
         );
+
+        parentActivity.activityCartItemList = fragCartItemList;
         binding = FragmentCartFirstBinding.inflate(inflater, container, false);
         binding.listviewCartItems.setAdapter(new CartItemAdapter(fragCartItemList));
         return binding.getRoot();
@@ -65,7 +76,9 @@ public class CartFirstFragment extends Fragment {
                             @Override
                             public void onChanged(List<CartItem> cartItemList) {
                                 fragCartItemList = cartItemList;
-                                binding.listviewCartItems.setAdapter(new CartItemAdapter(fragCartItemList));
+                                binding.listviewCartItems.setAdapter(new CartItemAdapter(
+                                        fragCartItemList
+                                ));
                             }
                         });
 

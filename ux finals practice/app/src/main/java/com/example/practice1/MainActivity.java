@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    public List<CartItem> cartItemList = new ArrayList<>();
 //    List<SaleItem> forSaleList = new ArrayList<>();
 
 //    [] fetch from csv
@@ -61,10 +62,18 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+              Intent intent = getIntent();
+        if(intent != null) {
+//            Bundle bundle = intent.getExtras();
+            cartItemList = intent.getParcelableArrayListExtra("CART_LIST");
+        }
+
+
+            binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CartFragmentActivity.class);
+                intent.putParcelableArrayListExtra("CART_LIST", (ArrayList<CartItem>) cartItemList);
                 startActivity(intent);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 ////                        .setAnchorView(R.id.fab)
