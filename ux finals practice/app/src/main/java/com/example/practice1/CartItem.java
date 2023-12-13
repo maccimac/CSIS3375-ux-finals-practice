@@ -16,6 +16,11 @@ public class CartItem implements Parcelable {
     public CartItem(SaleItem saleItem) {
         this.saleItem = saleItem;
     }
+    public CartItem(SaleItem saleItem, int amount) {
+
+        this.saleItem = saleItem;
+        this.amount = amount;
+    }
 
     protected CartItem(Parcel in) {
         saleItem = in.readParcelable(SaleItem.class.getClassLoader());

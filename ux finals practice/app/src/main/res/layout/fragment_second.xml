@@ -29,7 +29,7 @@
             android:text="Name"
             android:textAlignment="center"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView_detail_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_second" />
 
@@ -37,17 +37,17 @@
             android:id="@+id/textView_detail_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Price"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_detail_name" />
+            app:layout_constraintTop_toTopOf="@+id/textView_detail_name" />
 
         <ImageView
             android:id="@+id/image_detail_image"
             android:layout_width="200dp"
-            android:layout_height="240dp"
+            android:layout_height="200dp"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_detail_price" />
@@ -96,14 +96,14 @@
             android:layout_height="60dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             android:ems="10"
             android:inputType="number"
-            android:text="0"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_detail_add_to_cart"
             app:layout_constraintEnd_toStartOf="@+id/btn_detail_add_to_cart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_detail_color" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_detail_color"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/btn_detail_add_to_cart"
@@ -125,6 +125,36 @@
             app:layout_constraintEnd_toEndOf="@+id/textView_detail_desc"
             app:layout_constraintStart_toStartOf="@+id/textView_detail_desc"
             app:layout_constraintTop_toBottomOf="@+id/textView_detail_desc" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_detail_add_to_cart">
+
+            <RadioButton
+                android:id="@+id/radio_fast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I need fast delivery" />
+
+            <RadioButton
+                android:id="@+id/radio_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Regular delivery" />
+
+            <RadioButton
+                android:id="@+id/radio_slow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I can wait as long as it's discounted" />
+        </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

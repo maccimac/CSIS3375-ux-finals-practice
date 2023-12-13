@@ -42,6 +42,9 @@ public class CartItemAdapter extends BaseAdapter {
         cartItemBinding.textViewCartitemName.setText(
                 cartItemList.get(i).saleItem.name
         );
+        cartItemBinding.editTextCartitemAmount.setText(
+                String.valueOf(cartItemList.get(i).amount)
+        );
         return cartItemBinding.getRoot();
     }
 }

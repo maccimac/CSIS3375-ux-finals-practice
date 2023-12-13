@@ -1,7 +1,9 @@
 package com.example.practice1;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,10 @@ public class SecondFragment extends Fragment {
     private boolean spinnerReady = false;
     private FragmentSecondBinding binding;
 
+    SaleItem _saleItem;
+
+    ViewGroup _container;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -35,7 +41,7 @@ public class SecondFragment extends Fragment {
     ) {
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
-
+        _container = container;
         return binding.getRoot();
 
 
@@ -82,6 +88,7 @@ public class SecondFragment extends Fragment {
             binding.textViewDetailDesc.setText(
                     getArguments().getString("ITEM_DESCRIPTION", "Stationary bike")
             );
+            _saleItem = getArguments().getParcelable("SALE_TO_CART");
         }
 
         binding.spinnerDetailColor.setOnItemSelectedListener(
@@ -137,6 +144,13 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
+
+        binding.btnDetailAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToCart();
+            }
+        });
     }
 
     @Override
@@ -148,6 +162,19 @@ public class SecondFragment extends Fragment {
 
     public void addToCart(){
 
+        Log.d("INTENT ATTEMPT", "Should move to new act");
+        Intent intent = new Intent(
+                _container.getContext(), CartFragmentActivity.class
+        );
+        int amount = Integer.parseInt(
+                String.valueOf(binding.editTextAmount.getText())
+        );
+        intent.putExtra("SALE_AMOUNT", amount);
+        intent.putExtra("SALE_TO_CART", _saleItem);
+        MainActivity parentActivity = (MainActivity) getActivity();
+        intent.putParcelableArrayListExtra("CART_LIST", (ArrayList<CartItem>) parentActivity.cartItemList);
+//                intent.putExtra("TEXT", "Text");
+        startActivity(intent);
     }
 
 }

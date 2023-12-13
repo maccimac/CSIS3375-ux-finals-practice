@@ -41,10 +41,13 @@ public class CartFirstFragment extends Fragment {
                 fragCartItemList= newCartList;
             }
             SaleItem saleToCart =  intent.getParcelableExtra("SALE_TO_CART");
+            int amount = intent.getIntExtra("SALE_AMOUNT", 1);
+//            String amountStr = intent.getStringExtra("SALE_AMOUNT");
+//            int amount = Integer.parseInt(amountStr);
 
             if(saleToCart != null){
                 fragCartItemList.add(
-                        new CartItem(saleToCart)
+                        new CartItem(saleToCart, amount)
                 );
 
             }

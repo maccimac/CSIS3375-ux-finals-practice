@@ -107,6 +107,9 @@ public class FirstFragment extends Fragment {
                 "ITEM_PRICE", item.price
         );
 
+        bundle.putParcelable("SALE_TO_CART", item);
+        MainActivity parentActivity = (MainActivity) getActivity();
+        bundle.putParcelableArrayList("CART_LIST", (ArrayList<CartItem>) parentActivity.cartItemList);
         NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
 
