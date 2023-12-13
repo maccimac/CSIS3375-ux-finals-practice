@@ -1,6 +1,9 @@
 package com.example.practice1;
 
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,16 +83,22 @@ public class SaleItemAdapter extends RecyclerView.Adapter<SaleItemAdapter.SaleIt
             super(itemView);
             this.holderBinding = holderBinding;
 //            this.holderBinding.getRoot().setOnClickListener(
-//            this.holderBinding.btnReadMore.setOnClickListener(
-//                    new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            onItemClickListener.onItemClick(
-//                                    SaleItemHolder.this.getAdapterPosition()
+            this.holderBinding.btnAddToCart.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onItemClickListener.onItemClick(
+                                    SaleItemHolder.this.getAdapterPosition()
+                            );
+//                            Log.d("INTENT ATTEMPT", "Shoule move to new act");
+//                            Intent intent = new Intent(
+//                                    holderBinding.getRoot().getContext(), CartFragmentActivity.class
 //                            );
-//                        }
-//                    }
-//            );
+//                            holderBinding.getRoot().getContext().startActivity(intent);
+
+                        }
+                    }
+            );
             this.holderBinding.btnReadMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

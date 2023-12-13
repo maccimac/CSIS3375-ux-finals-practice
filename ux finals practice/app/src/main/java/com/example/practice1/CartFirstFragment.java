@@ -1,5 +1,6 @@
 package com.example.practice1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +28,27 @@ public class CartFirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        Intent intent = getActivity().getIntent();
+        if(intent != null){
+//            Bundle bundle = intent.getExtras();
+            SaleItem saleToCart =  intent.getParcelableExtra("SALE_TO_CART");
+            if(saleToCart != null){
+                fragCartItemList.add(
+                        new CartItem(saleToCart)
+                );
+            }
 
-        fragCartItemList.add(new CartItem());
-        fragCartItemList.add(new CartItem());
+        }else{
+            fragCartItemList.add(
+                new CartItem()
+            );
+        }
 
-        fragCartItemList.add(new CartItem());
-        fragCartItemList.add(new CartItem());
+
+
+        fragCartItemList.add(
+                new CartItem()
+        );
         binding = FragmentCartFirstBinding.inflate(inflater, container, false);
         binding.listviewCartItems.setAdapter(new CartItemAdapter(fragCartItemList));
         return binding.getRoot();

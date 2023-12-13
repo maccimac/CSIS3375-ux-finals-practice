@@ -1,9 +1,13 @@
 package com.example.practice1;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import java.time.LocalDate;
 
-public class SaleItem {
+public class SaleItem implements Parcelable {
     String name = "Name";
     String description = "Description";
     double price = 0.00;
@@ -30,6 +34,30 @@ public class SaleItem {
         this.itemDate = itemDate;
     }
 
+
+    protected SaleItem(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        price = in.readDouble();
+        url = in.readString();
+        if (in.readByte() == 0) {
+            imageId = null;
+        } else {
+            imageId = in.readInt();
+        }
+    }
+
+    public static final Creator<SaleItem> CREATOR = new Creator<SaleItem>() {
+        @Override
+        public SaleItem createFromParcel(Parcel in) {
+            return new SaleItem(in);
+        }
+
+        @Override
+        public SaleItem[] newArray(int size) {
+            return new SaleItem[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -74,4 +102,23 @@ public class SaleItem {
     public Integer getImageId() {return imageId;}
 
     public void setImageId(Integer imgId) {this.imageId = imgId;}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeDouble(price);
+        parcel.writeString(url);
+        if (imageId == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(imageId);
+        }
+    }
 }

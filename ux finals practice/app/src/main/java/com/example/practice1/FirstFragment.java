@@ -1,5 +1,6 @@
 package com.example.practice1;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +52,14 @@ public class FirstFragment extends Fragment {
             @Override
             public void onItemClick(int i) {
 
+                Log.d("INTENT ATTEMPT", "Should move to new act");
+                Intent intent = new Intent(
+                        container.getContext(), CartFragmentActivity.class
+                );
+                SaleItem saleToCart = forSaleList.get(i);
+                intent.putExtra("SALE_TO_CART", saleToCart);
+//                intent.putExtra("TEXT", "Text");
+                startActivity(intent);
             }
 
             @Override
