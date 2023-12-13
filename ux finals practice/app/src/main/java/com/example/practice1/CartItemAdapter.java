@@ -45,6 +45,14 @@ public class CartItemAdapter extends BaseAdapter {
         cartItemBinding.editTextCartitemAmount.setText(
                 String.valueOf(cartItemList.get(i).amount)
         );
+
+        cartItemBinding.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cartItemList.remove(i);
+                notifyDataSetChanged();
+            }
+        });
         return cartItemBinding.getRoot();
     }
 }

@@ -163,6 +163,7 @@ public class SecondFragment extends Fragment {
     public void addToCart(){
 
         Log.d("INTENT ATTEMPT", "Should move to new act");
+
         Intent intent = new Intent(
                 _container.getContext(), CartFragmentActivity.class
         );
@@ -171,6 +172,11 @@ public class SecondFragment extends Fragment {
         );
         intent.putExtra("SALE_AMOUNT", amount);
         intent.putExtra("SALE_TO_CART", _saleItem);
+        if(binding.radioFast.isChecked()){
+            intent.putExtra("DELIVERY", "FAST");
+        }else{
+            intent.putExtra("DELIVERY", "NORMAL");
+        }
         MainActivity parentActivity = (MainActivity) getActivity();
         intent.putParcelableArrayListExtra("CART_LIST", (ArrayList<CartItem>) parentActivity.cartItemList);
 //                intent.putExtra("TEXT", "Text");

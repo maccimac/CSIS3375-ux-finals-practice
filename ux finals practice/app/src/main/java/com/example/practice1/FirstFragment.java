@@ -130,9 +130,9 @@ public class FirstFragment extends Fragment {
             String csvLine;
 
             // with header
-//            if((csvLine = reader.readLine())!= null){
-//
-//            }
+            if((csvLine = reader.readLine())!= null){
+
+            }
 
             while((csvLine = reader.readLine())!= null){
                 String[] itemValues = csvLine.split(",");
